@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F54B5EAE-6355-4222-A11D-D3A6A85B7018}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HireKoro</RootNamespace>
+    <AssemblyName>HireKoro</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net48\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.7\lib\net48\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\AdminInvoices.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminInvoices.Designer.cs">
+      <DependentUpon>AdminInvoices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminPaymentLogs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminPaymentLogs.Designer.cs">
+      <DependentUpon>AdminPaymentLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminProjectLogs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminProjectLogs.Designer.cs">
+      <DependentUpon>AdminProjectLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminProjects.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminProjects.Designer.cs">
+      <DependentUpon>AdminProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminReviews.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminReviews.Designer.cs">
+      <DependentUpon>AdminReviews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminTasksPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminTasksPage.Designer.cs">
+      <DependentUpon>AdminTasksPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminUsers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminUsers.Designer.cs">
+      <DependentUpon>AdminUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ChatBubble.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ChatBubble.Designer.cs">
+      <DependentUpon>ChatBubble.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ClientHomePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ClientHomePage.Designer.cs">
+      <DependentUpon>ClientHomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ClientProfilePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ClientProfilePage.Designer.cs">
+      <DependentUpon>ClientProfilePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ClientRegister.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ClientRegister.Designer.cs">
+      <DependentUpon>ClientRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CreateProjectPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateProjectPage.Designer.cs">
+      <DependentUpon>CreateProjectPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ForgotPassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ForgotPassword.Designer.cs">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreelancerCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FreelancerCard.Designer.cs">
+      <DependentUpon>FreelancerCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreelancerDetailsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FreelancerDetailsPage.Designer.cs">
+      <DependentUpon>FreelancerDetailsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreelancerHiredSuccesfullyPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FreelancerHiredSuccesfullyPage.Designer.cs">
+      <DependentUpon>FreelancerHiredSuccesfullyPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreelancerHiringPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FreelancerHiringPage.Designer.cs">
+      <DependentUpon>FreelancerHiringPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreelancerProfilePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FreelancerProfilePage.Designer.cs">
+      <DependentUpon>FreelancerProfilePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreelancerRegister.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FreelancerRegister.Designer.cs">
+      <DependentUpon>FreelancerRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FreelancerTaskPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FreelancerTaskPage.Designer.cs">
+      <DependentUpon>FreelancerTaskPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InvoiceCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\InvoiceCard.Designer.cs">
+      <DependentUpon>InvoiceCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Login.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MessageContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MessageContainer.Designer.cs">
+      <DependentUpon>MessageContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MessagesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MessagesPage.Designer.cs">
+      <DependentUpon>MessagesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MyInvoices.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MyInvoices.Designer.cs">
+      <DependentUpon>MyInvoices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MyProjects.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MyProjects.Designer.cs">
+      <DependentUpon>MyProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaymentPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\PaymentPage.Designer.cs">
+      <DependentUpon>PaymentPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectCard.Designer.cs">
+      <DependentUpon>ProjectCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectDetailsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectDetailsPage.Designer.cs">
+      <DependentUpon>ProjectDetailsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReviewCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ReviewCard.Designer.cs">
+      <DependentUpon>ReviewCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SignUp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\SignUp.Designer.cs">
+      <DependentUpon>SignUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TaskCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskCard.Designer.cs">
+      <DependentUpon>TaskCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UsersPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UsersPage.Designer.cs">
+      <DependentUpon>UsersPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Welcome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Welcome.Designer.cs">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Auth.cs" />
+    <Compile Include="Utilities\DataAccess.cs" />
+    <Compile Include="Utilities\DraggableWindow.cs" />
+    <Compile Include="Utilities\PasswordHelper.cs" />
+    <EmbeddedResource Include="Forms\AdminInvoices.resx">
+      <DependentUpon>AdminInvoices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminPaymentLogs.resx">
+      <DependentUpon>AdminPaymentLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminProjectLogs.resx">
+      <DependentUpon>AdminProjectLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminProjects.resx">
+      <DependentUpon>AdminProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminReviews.resx">
+      <DependentUpon>AdminReviews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminTasksPage.resx">
+      <DependentUpon>AdminTasksPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminUsers.resx">
+      <DependentUpon>AdminUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChatBubble.resx">
+      <DependentUpon>ChatBubble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClientRegister.resx">
+      <DependentUpon>ClientRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ForgotPassword.resx">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreelancerCard.resx">
+      <DependentUpon>FreelancerCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreelancerDetailsPage.resx">
+      <DependentUpon>FreelancerDetailsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreelancerHiredSuccesfullyPage.resx">
+      <DependentUpon>FreelancerHiredSuccesfullyPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreelancerHiringPage.resx">
+      <DependentUpon>FreelancerHiringPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreelancerProfilePage.resx">
+      <DependentUpon>FreelancerProfilePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreelancerRegister.resx">
+      <DependentUpon>FreelancerRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClientHomePage.resx">
+      <DependentUpon>ClientHomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FreelancerTaskPage.resx">
+      <DependentUpon>FreelancerTaskPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InvoiceCard.resx">
+      <DependentUpon>InvoiceCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MessageContainer.resx">
+      <DependentUpon>MessageContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MessagesPage.resx">
+      <DependentUpon>MessagesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MyInvoices.resx">
+      <DependentUpon>MyInvoices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MyProjects.resx">
+      <DependentUpon>MyProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaymentPage.resx">
+      <DependentUpon>PaymentPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectCard.resx">
+      <DependentUpon>ProjectCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectDetailsPage.resx">
+      <DependentUpon>ProjectDetailsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReviewCard.resx">
+      <DependentUpon>ReviewCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SignUp.resx">
+      <DependentUpon>SignUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UsersPage.resx">
+      <DependentUpon>UsersPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Welcome.resx">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\public\" />
+    <Folder Include="assets\users\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

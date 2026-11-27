@@ -1,0 +1,255 @@
+﻿using HireKoro.Utilities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using HireKoro.Forms;
+using Guna.UI2.WinForms;
+
+namespace HireKoro
+{
+    public partial class Main : Form
+    {
+        internal static string CurrentUserId { get; set; }
+        internal static string userRole { get; set; }
+        internal static Panel MainPanel { get;  set; }
+        internal static Panel SidePanel { get; set; }
+        internal static Guna2HtmlLabel TopLabelText { get; set; }
+
+        // Sidebar Panel
+        internal static Panel PNLHome { get; set; }
+        internal static Panel PNLProjects { get; set; }
+        internal static Panel PNLUsers { get; set; }
+        internal static Panel PNLTasks { get; set; }
+        internal static Panel PNLReviews { get; set; }
+        internal static Panel PNLInvoices { get; set; }
+        internal static Panel PNLProfile { get; set; }
+        internal static Panel PNLMyProjects { get; set; }
+        internal static Panel PNLLogs { get; set; }
+        internal static Panel PNLMyInvoices { get; set; }
+        internal static Panel PNLMyTasks { get; set; }
+        internal static Panel PNLMessages { get; set; }
+
+
+
+        // Pages
+        internal static UserControl WelcomePage { get; set; }
+        internal static UserControl SignInPage { get; set; }
+        internal static UserControl SignUpPage { get; set; }
+        internal static UserControl FreelancerRegisterPage { get; set; }
+        internal static UserControl FreelancerTaskPage { get; set; }
+        internal static UserControl FreelancerDetailsPage { get; set; }
+        internal static UserControl FreelancerHiringPage { get; set; }
+        internal static UserControl FreelancerHiredSuccesfully { get; set; }
+        internal static UserControl ClientRegisterPage { get; set; }
+        internal static UserControl ClientHomePage { get; set; }
+        internal static UserControl ProfilePage { get; set;  }
+        internal static UserControl AdminProjectsPage { get; set; }
+        internal static UserControl AdminTasksPage { get; set; }
+        internal static UserControl AdminUsersPage { get; set; }
+        internal static UserControl AdminReviewsPage { get; set; }
+        internal static UserControl AdminInvoicesPage { get; set; }
+        internal static UserControl AdminProjectLogPage { get; set; }
+        internal static UserControl AdminPaymentLogPage { get; set; }
+        internal static UserControl ForgotPasswordPage { get; set; }
+        internal static UserControl MyProjectPage { get; set; }
+        internal static UserControl ProjectDetailsPage { get; set; }
+        internal static UserControl PaymentPage { get; set; }
+        internal static UserControl MyInvoicesPage { get; set; }
+        internal static UserControl MessagesPage { get; set; }
+
+
+        // Data Access Object
+        internal static DataAccess DB { get; set; }
+
+        // Auth Object
+        internal static Auth auth { get; set; }
+
+        public Main()
+        {
+            InitializeComponent();
+            DraggableWindow.MakePanelDraggable(this.TopPanel, this);
+            DB = new DataAccess();
+            auth = new Auth();
+            CurrentUserId = "1";
+            MainPanel = this.pnlMainPanel;
+            SidePanel = this.pnlSidePanel;
+            TopLabelText = this.lblTopText;
+            PNLHome = this.pnlHome;
+            PNLProjects = this.pnlAdminProjects;
+            PNLUsers = this.pnlUsers;
+            PNLTasks = this.pnlAdminTasks;
+            PNLReviews = this.pnlReviews;
+            PNLInvoices = this.pnlInvoices;
+            PNLProfile = this.pnlMyProfile;
+            PNLMyProjects = this.pnlMyProjects;
+            PNLLogs = this.pnlLogs;
+            PNLMyInvoices = this.pnlMyInvoices;
+            PNLMyTasks = this.pnlMyTasks;
+            PNLMessages = this.pnlMessages;
+
+            WelcomePage = new Welcome();
+            this.sidebarBtnReset();
+            ChangeWindow(WelcomePage);
+
+        }
+
+        // Change Window
+        internal static void ChangeWindow(UserControl NextPage)
+        {
+            NextPage.Dock = DockStyle.Fill;
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(NextPage);
+            NextPage.Show();
+        }
+
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            auth.Logout();
+            PNLHome.Visible = true; 
+            PNLProjects.Visible = true;
+            PNLUsers.Visible = true;
+            PNLTasks.Visible = true;
+            PNLReviews.Visible = true;
+            PNLInvoices.Visible = true;
+            PNLProfile.Visible = true;
+            PNLMyProjects.Visible = true;
+            PNLLogs.Visible = true;
+            PNLMyInvoices.Visible = true;
+            PNLMyTasks.Visible = true;
+            PNLMessages.Visible = true;
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            ProfilePage = new FreelancerProfilePage();
+            ChangeWindow(ProfilePage);
+            sidebarBtnReset();
+            btnProfile.ForeColor = Color.FromArgb(121, 208, 253);
+            SidePanel.Visible = true;
+        }
+
+        private void btnProjects_Click(object sender, EventArgs e)
+        {
+            AdminProjectsPage = new AdminProjects();
+            ChangeWindow(AdminProjectsPage);
+            sidebarBtnReset();
+            btnProjects.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = "Admin - Projects";
+        }
+
+        private void btnReviews_Click(object sender, EventArgs e)
+        {
+            AdminReviewsPage = new AdminReviews();
+            ChangeWindow(AdminReviewsPage);
+            sidebarBtnReset();
+            btnReviews.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = " Admin - Reviews";
+        }
+
+        private void btnInvoices_Click(object sender, EventArgs e)
+        {
+            AdminInvoicesPage = new AdminInvoices();
+            ChangeWindow(AdminInvoicesPage);
+            sidebarBtnReset();
+            btnInvoices.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = " Admin - Invoices";
+        }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            AdminUsersPage = new AdminUsers();
+            ChangeWindow(AdminUsersPage);
+            sidebarBtnReset();
+            btnUsers.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = " Admin - Users";
+        }
+
+        private void btnAdminTasks_Click(object sender, EventArgs e)
+        {
+            AdminTasksPage = new AdminTasksPage();
+            ChangeWindow(AdminTasksPage);
+            sidebarBtnReset();
+            btnAdminTasks.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = "Admin - Tasks";
+        }
+
+        private void btnTask_Click(object sender, EventArgs e)
+        {
+            FreelancerTaskPage = new FreelancerTaskPage();
+            ChangeWindow(FreelancerTaskPage);
+            sidebarBtnReset();
+            btnTask.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = "My Tasks";
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            ClientHomePage = new ClientHomePage();
+            ChangeWindow(ClientHomePage);
+            sidebarBtnReset();
+            btnHome.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = "Home";
+        }
+
+        public void sidebarBtnReset()
+        {
+            this.btnAdminTasks.ForeColor = this.btnHome.ForeColor = this.btnInvoices.ForeColor = Color.White;
+            this.btnMyProjects.ForeColor = this.btnProfile.ForeColor = this.btnMessages.ForeColor = Color.White;
+            this.btnProjects.ForeColor = this.btnUsers.ForeColor = Color.White;
+            this.btnLogs.ForeColor = this.btnReviews.ForeColor = this.btnTask.ForeColor = Color.White;
+        }
+
+        private void btnMyProjects_Click(object sender, EventArgs e)
+        {
+            MyProjectPage = new MyProjects();
+            ChangeWindow(MyProjectPage);
+            sidebarBtnReset();
+            btnMyProjects.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = " My Projects";
+        }
+
+        private void btnLogs_Click(object sender, EventArgs e)
+        {
+            AdminProjectLogPage = new AdminProjectLogs();
+            ChangeWindow(AdminProjectLogPage);
+            sidebarBtnReset();
+            btnLogs.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = " Admin - Project Logs";
+        }
+
+        private void btnMyInvoices_Click(object sender, EventArgs e)
+        {
+            MyInvoicesPage = new MyInvoices();
+            ChangeWindow(MyInvoicesPage);
+            sidebarBtnReset();
+            btnMyInvoices.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = " My Invoices";
+        }
+
+        private void btnMessages_Click(object sender, EventArgs e)
+        {
+            MessagesPage = new MessagesPage();
+            ChangeWindow(MessagesPage);
+            sidebarBtnReset();
+            btnMessages.ForeColor = Color.FromArgb(121, 208, 253);
+            Main.TopLabelText.Text = " Messages";
+        }
+    }
+}

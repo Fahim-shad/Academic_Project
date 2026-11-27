@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace HireKoro.Forms
+{
+    public partial class ProjectDetailsPage : UserControl
+    {
+        string projectId { get; set; }
+        string title { get; set; }
+        string status { get; set; }
+        string description { get; set; }
+        DateTime startDate { get; set; }
+        float hours { get; set; }
+        float cost { get; set; }
+        public ProjectDetailsPage(string id)
+        {
+            InitializeComponent();
+            this.projectId = id;
+            this.loadProject(id);
+            if(Main.userRole != "Client")
+            {
+                btnDelete.Visible = false;
+                btnUpdate.Visible = false;
+                txtProjectName.ReadOnly = true;
+                txtProjectDescription.ReadOnly = true;
+                txtHours.ReadOnly = true;
+                txtCost.ReadOnly = true;
+                cmbStatus.Enabled = false;
+                dtpStartDate.Enabled = false;
+            }
+        }
+        internal void loadProject(string projectId)
+        {
+            try
+            {
+                string query = $"SELECT * FROM Projects WHERE ProjectID = {projectId}";
+                var response = Main.DB.ExecuteQueryTable(query);
+                if (response != null)
+                {
+                    txtProjectName.Text = response.Rows[0]["title"].ToString();
+                    cmbStatus.Text = response.Rows[0]["ProjectStatus"].ToString();
+                    txtProjectDescription.Text = response.Rows[0]["ProjectDescription"].ToString();
+                    dtpStartDate.Value = DateTime.Parse(response.Rows[0]["StartDate"].ToString());
+                    txtCost.Text = response.Rows[0]["cost"].ToString();
+                    txtHours.Text = response.Rows[0]["ProjectHours"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            this.title = txtProjectName.Text;
+            this.description = txtProjectDescription.Text;
+            this.hours = float.Parse(txtHours.Text);
+            this.status = cmbStatus.Text;
+            this.startDate = dtpStartDate.Value;
+            this.cost = float.Parse(txtCost.Text);
+            try
+            {
+
+                string query = $@"UPDATE PROJECTS SET 
+                                 Title = '{this.title}',
+                                 ProjectDescription = '{this.description}',
+                                 ProjectStatus = '{this.status}',
+                                 ProjectHours = {this.hours},
+                                 StartDate = '{this.startDate:yyyy-MM-dd}',
+                                 Cost = {this.cost}
+                                 WHERE ProjectID = {this.projectId}";
+                var response = Main.DB.ExecuteDMLQuery(query);
+                if (response > 0)
+                {
+                    MessageBox.Show("Project Updated Successfully!");
+                    loadProject(this.projectId);
+                    if(this.status == "Completed")
+                    {
+                        string queryInvoice = $@"INSERT INTO INVOICES (ProjectID, IssueDate, DueDate, Amount, Status) VALUES
+                                         ({this.projectId}, '{DateTime.Now:yyyy-MM-dd}', '{DateTime.Now.AddDays(30):yyyy-MM-dd}', {this.cost}, 'Pending')";
+                        Main.DB.ExecuteDMLQuery(queryInvoice);
+                        Main.DB.ExecuteDMLQuery($"INSERT INTO PROJECTLOG (ProjectID, Status, Comment) Values ('{this.projectId}', 'Updated', 'Project Updated'); ");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update project.");
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to delete this project?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                try
+                {
+                    string query = $"DELETE FROM PROJECTS WHERE ProjectID = {this.projectId}";
+                    var response = Main.DB.ExecuteDMLQuery(query);
+                    if (response > 0)
+                    {
+                        MessageBox.Show("Project Deleted Successfully!");
+                        Main.MyProjectPage = new MyProjects();
+                        Main.ChangeWindow(Main.MyProjectPage);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete project.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnReview_Click(object sender, EventArgs e)
+        {
+            string comment = txtComment.Text;
+            int rating = Int32.Parse(txtRating.Text);
+            try
+            {
+                string query = $@"INSERT INTO Reviews (ProjectID, ReviewerID, Rating, Comment) VALUES
+                                 ({this.projectId}, {Main.CurrentUserId}, {rating}, '{comment}')";
+                var response = Main.DB.ExecuteDMLQuery(query);
+                if (response > 0)
+                {
+                    MessageBox.Show("Review Submitted Successfully!");
+                    txtComment.Text = "";
+                    txtRating.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Failed to submit review.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
+}
